@@ -16,6 +16,7 @@ ImgB = Img(:,:,3);
 %% Transformada directa, inversa y reconstrucción
 
 Imagen = dct(Img);
+imwrite(Imagen, 'Imagen.png')
 
 %% Vídeo
 
@@ -33,7 +34,6 @@ Imagen = dct(Img);
 %% Vídeo 2
 
 MovObj = VideoReader('Video.avi');
-
 nFrames = MovObj.NumberOfFrames;
 %vidHeight = MovObj.Height;
 %vidWidth = MovObj.Width;
@@ -42,12 +42,18 @@ nFrames = MovObj.NumberOfFrames;
 %mov(1:nFrames) = struct('cdata', zeros(vidHeight, vidWidth, 3, 'uint8'),'colormap', []);
 
 % Read one frame at a time.
-%movie = avifile('Video1.avi');
+movie = avifile('Video1.avi');
+% movie = read(MovObj, k);
 for k = 1 : nFrames
-    movie= read(MovObj, k);
-    h = dct (movie);
-    l = im2double(h);
-    movie = addframe(movie,l);
+    frame = read(MovObj, k);
+    %h = dct (frame);
+    l = im2double(frame);
+    movie = addframe(movie,frame);
 end
 movie = close(movie);
-implay('Video2.avi');
+%implay('Video2.avi');
+
+%% Video
+MovObj = VideoReader('Video.avi');
+predic(MovObj, 60);
+
