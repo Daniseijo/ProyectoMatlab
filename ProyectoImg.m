@@ -57,8 +57,9 @@ imshow(Img_bin);
 %% Eliminar y crear las imagenes para ver los efectos de quitar pixeles en la DCT (Para Barbie)
 Img = imread('lena_rgb.png');
 for i = -1:7
-    Img1 = dct(Img, i);
-    imwrite(Img1, ['Imagen' num2str(i+1) '.png'])
+    [Img1 ImgDCT] = dct(Img, i);
+    imwrite(Img1, ['Imagen' num2str(i+1) '.png']);
+    imwrite(ImgDCT, ['Imagen' num2str(i+1) 'DCT.png']);
 end
 imshow(Img);
 
