@@ -3,7 +3,7 @@
 %% Cargar imagen y dividir en planos
 
 % Cargamos imagen RGB
-Img = imread('lena_rgb.png');
+Img = imread('blanco_negro2.png');
 
 % Creamos tres variables cada una con un color R, G y B
 ImgR = Img(:,:,1);

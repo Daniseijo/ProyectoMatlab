@@ -1,4 +1,4 @@
-function [Imagen] = dct( img )
+function [Imagen] = dct( img, numQuitaCal )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,8 +8,11 @@ imgB = img(:,:,3);
 
 fun = @(block_struct) dct2(block_struct.data);
 BR = blockproc(imgR, [8 8], fun);
+BR = img2block(BR, numQuitaCal);
 BG = blockproc(imgG, [8 8], fun);
+BG = img2block(BG, numQuitaCal);
 BB = blockproc(imgB, [8 8], fun);
+BB = img2block(BB, numQuitaCal);
 
 fun1 = @(block_struct) idct2(block_struct.data);
 AR = blockproc(BR, [8 8], fun1);

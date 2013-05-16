@@ -9,7 +9,7 @@ ImgR = Img(:,:,1);
 ImgG = Img(:,:,2);
 ImgB = Img(:,:,3);
 
-% Guardamos tamaÃ±o y nÃºmero planos de colores
+% Guardamos tamaño y número planos de colores
 [m n p] = size(Img);
 
 % Mostramos las cuatro imagenes
@@ -52,12 +52,19 @@ pause
 Img_bin = im2bw(Img,0.5);
 imshow(Img_bin);
 
-%% Pruebas raras para dividir la imagen en bloques de 8x8
 
-Img1 = img2block(ImgR);
-imshow(Img1);
 
-%% DCT, ImplementaciÃ³n
+%% Eliminar y crear las imagenes para ver los efectos de quitar pixeles en la DCT (Para Barbie)
+Img = imread('lena_rgb.png');
+for i = -1:7
+    Img1 = dct(Img, i);
+    imwrite(Img1, ['Imagen' num2str(i+1) '.png'])
+end
+imshow(Img);
+
+
+
+%% DCT, Implementación
 ImgRdct = dct2(ImgR);
 imshow(ImgRdct)
 ImgGdct = dct2(ImgG);
