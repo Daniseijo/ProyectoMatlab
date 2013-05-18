@@ -34,6 +34,24 @@ a = 2;
 Img_sub = Img(1:a:end, 1:a:end, 1:1:end);
 imshow(Img_sub);
 
+%% Predic
+frameori = imread('ImgOri.png');
+framesig = imread('ImgSig.png');
+framepred = im2uint16(frameori) - im2uint16(framesig);
+imshow(framepred);
+pause;
+imwrite(framepred, 'ImgPred.png');
+framepredDesp = imread('ImgPred.png');
+ultframe = im2uint16(frameori) - im2uint16(framepredDesp);
+imshow(framepredDesp);
+pause;
+imshow(im2uint16(framepredDesp)-framepred);
+pause;
+imshow(ultframe);
+pause;
+ultframe = im2uint16(frameori) - (framepred);
+imshow(ultframe);
+
 %% Aclarar, oscurecer
 % Debemos pasar a double para operar con decimales bien
 Img_double = double(Img);
@@ -59,10 +77,19 @@ Img = imread('lena_rgb.png');
 for i = -1:7
     [Img1 ImgDCT] = dct(Img, i);
     imwrite(Img1, ['Imagen' num2str(i+1) '.png']);
-    imwrite(ImgDCT, ['Imagen' num2str(i+1) 'DCT.png']);
+    imwrite(ImgDCT, ['ImagenDCT' num2str(i+1) '.png']);
 end
 imshow(Img);
 
+%% Parecido a lo anterior pero con umbral ahora (Para Barbie) NEW
+
+Img = imread('lena_rgb.png');
+for i = 0:10
+    [Img1 ImgDCT] = dctUmbral(Img, (i*2));
+    imwrite(Img1, ['ImagenUmbral' num2str(i) '.png']);
+    imwrite(ImgDCT, ['ImagenUmbralDCT' num2str(i) '.png']);
+end
+imshow(Img);
 
 
 %% DCT, Implementación

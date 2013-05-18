@@ -32,7 +32,6 @@ imwrite(Imagen, 'Imagen.png')
 %end
 
 %% Vídeo 2
-
 MovObj = VideoReader('Video.avi');
 nFrames = MovObj.NumberOfFrames;
 %vidHeight = MovObj.Height;
@@ -48,12 +47,24 @@ for k = 1 : nFrames
     frame = read(MovObj, k);
     %h = dct (frame);
     l = im2double(frame);
-    movie = addframe(movie,frame);
+    movie = addframe(movie,l);
 end
 movie = close(movie);
 %implay('Video2.avi');
 
 %% Video
 MovObj = VideoReader('Video.avi');
-predic(MovObj, 60);
+predic(MovObj, 15);
 
+%%
+MovObj = VideoReader('Video1.avi');
+unPredic (MovObj,15);
+%% Vasanz
+videoFReader = vision.VideoFileReader('Video.avi');
+i = 0;
+while ~isDone(videoFReader)
+  i = i+1;
+  videoFrame = step(videoFReader);
+  imwrite(videoFrame, ['video' num2str(i) '.png']);
+end
+release(videoFReader);
